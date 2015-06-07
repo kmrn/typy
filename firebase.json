@@ -1,0 +1,9 @@
+{
+  "firebase": "typy",
+  "public": "www",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

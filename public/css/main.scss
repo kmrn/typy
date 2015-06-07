@@ -1,0 +1,160 @@
+@import "normalize";
+@import "skeleton";
+@import "mixins";
+
+
+body {
+  background: #f1f1f1;
+
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+
+header {
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #fff;
+
+  .logo {
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 3em;
+    text-shadow: 0.5px 1px 3px rgba(0, 0, 0, 0.3);
+    margin: 10px 20px;
+
+    // &:active {
+    //   -webkit-box-shadow: inset 0px 2px 4px 1px rgba(0,0,0,0.4);
+    //   -moz-box-shadow: inset 0px 2px 4px 1px rgba(0,0,0,0.4);
+    //   box-shadow: inset 0px 2px 4px 1px rgba(0,0,0,0.4);
+
+    //   border-radius: 10px 10px 10px 10px;
+    //   -moz-border-radius: 10px 10px 10px 10px;
+    //   -webkit-border-radius: 10px 10px 10px 10px;
+    // }
+  }
+
+  .navlist li {
+    display: inline;
+    margin: 0 5px;
+  }
+
+  -webkit-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.5);
+  box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.5);
+}
+
+pre code {
+  background-color: #fff;
+  text-align: center;
+}
+
+.main {
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+
+.page-title {
+  text-align: center;
+}
+
+.submit {
+  height: 60px;
+  width: 120px;
+  font-size: 1em;
+}
+
+.about {
+  margin-top: 40px;
+  padding-top: 40px;
+  padding-bottom: 50px;
+  color: #fff;
+  background-color: #555;
+  @include raised();
+}
+
+.rules {
+  padding: 20px;
+  background-color: #f9f9f9;
+
+  @include raised();
+
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+
+  margin-bottom: 40px;
+}
+
+
+.start {
+  text-align: center;
+  margin-top: 40px;
+
+  .button-primary {
+    @include raised();
+  }
+}
+
+.high-scores {
+  margin-top: 100px;
+}
+
+.login-status {
+  text-align: right;
+  vertical-align: middle;
+  position: absolute;
+  right: 20px;
+
+  .button {
+    height: 30px;
+    padding: 0 20px;
+    text-align: center;
+    line-height: 30px;
+  }
+}
+
+.login-container {
+  text-align: center;
+  padding: 60px 2.5px;
+  margin: 0 auto;
+  background-color: #fefefe;
+  @include raised();
+  max-width: 400px;
+}
+
+.login-form {
+  margin: 0 auto;
+  max-width: 300px;
+}
+
+.login-form-success {
+  color: #fff;
+  background-color: #43A047;
+}
+
+
+
+footer {
+  @include raised();
+
+  padding: 40px;
+  background-color: #fff;
+
+  text-align: center;
+}
+
+
+.hidden {
+  display: none;
+  position: absolute;
+}
