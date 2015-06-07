@@ -3,20 +3,30 @@
 <head>
 	<title>Typy: A typing game!</title>
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   
-  <!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+  <!-- Angular/Firebase Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.6/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
-</head>
-<body>
+
+  <!-- Javascripts -->
+  <script>
+    var app = angular.module("typy", ["firebase"]);
+  </script>
   <script src="js/auth.js"></script>
+</head>
+<body ng-app="typy">
   <header class="header">
-    <script>var isLoggedIn = authData;</script>
-    <div class="login-buttons">
-      <a href="/login.html" class="button">Login</a>
-      <a href="/signup.html" class="button button-primary">Sign Up</a>
+    <div ng-controller="authCtrl" class="login-status">
+      <div ng-show="authData !== null" class="login-buttons">
+        <a ng-click="logout()" class="button">Logout</a>
+      </div>
+      <div ng-show="authData === null" class="login-buttons">
+        <a href="/login.html" class="button">Login</a>
+        <a href="/signup.html" class="button button-primary">Sign Up</a>
+      </div>
     </div>
     <a href="/" class="logo"><img src="img/typylogosmall.png" alt="Typy" /></a>
     <ul class="navlist">
@@ -41,6 +51,7 @@
 <div class="container high-scores">
   <div class="row">
     <h3 class="page-title">&mdash; HIGH SCORES &mdash;</h3>
+    {{ authData }}
     <!-- <div class="leaderboard">
       <table id="leaderboardTable">
         <tr>

@@ -3,20 +3,30 @@
 <head>
 	<title>Typy: A typing game!</title>
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   
-  <!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+  <!-- Angular/Firebase Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.6/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
-</head>
-<body>
+
+  <!-- Javascripts -->
+  <script>
+    var app = angular.module("typy", ["firebase"]);
+  </script>
   <script src="js/auth.js"></script>
+</head>
+<body ng-app="typy">
   <header class="header">
-    <script>var isLoggedIn = authData;</script>
-    <div class="login-buttons">
-      <a href="/login.html" class="button">Login</a>
-      <a href="/signup.html" class="button button-primary">Sign Up</a>
+    <div ng-controller="authCtrl" class="login-status">
+      <div ng-show="authData !== null" class="login-buttons">
+        <a ng-click="logout()" class="button">Logout</a>
+      </div>
+      <div ng-show="authData === null" class="login-buttons">
+        <a href="/login.html" class="button">Login</a>
+        <a href="/signup.html" class="button button-primary">Sign Up</a>
+      </div>
     </div>
     <a href="/" class="logo"><img src="img/typylogosmall.png" alt="Typy" /></a>
     <ul class="navlist">
@@ -34,16 +44,15 @@
       <div class="login-form-container">
         <h3 class="page-title">Login</h3>
         <hr>
-        <form id="login-form" method="login" name="login" class="login-form">
-          <input name="email" id="login-email" type="email" placeholder="Email" class="u-full-width">
-          <input name="password" id="login-password" type="password" placeholder="Password" class="u-full-width">
-          <input type="button" value="Login" id="login-submit" onclick="authenticatePassword()" class="button-primary">
+        <form ng-controller="authCtrl" ng-submit="login()" id="login-form" class="login-form">
+          <input id="login-email" type="email" placeholder="Email" class="u-full-width" ng-model="email" required>
+          <input id="login-password" type="password" placeholder="Password" class="u-full-width" ng-model="password" required>
+          <input type="submit" value="Login" id="login-submit" class="button-primary">
         </form>
         <hr>
         <a href="/signup.html">Create an Account</a><br>
         <a href="/forgot.html">Forgot your password?</a>
       </div>
-      <h3 class="success-text page-title hidden">Success!</h3>
     </div>
   </div>
 </div>
