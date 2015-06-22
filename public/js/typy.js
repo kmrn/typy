@@ -44,8 +44,8 @@ app.factory("GameObject", ["$firebaseObject",
     }
 ]);
 
-app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "GetGame", "GameObject",
-    function($scope, Auth, Profile, Library, Games, GetGame, GameObject) {
+app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library", "Games", "GetGame", "GameObject",
+    function($scope, $interval, Auth, Profile, Library, Games, GetGame, GameObject) {
 
         $scope.auth = Auth;
 
@@ -60,6 +60,9 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ge
 
         $scope.game;
 
+        $scope.count = function() {
+            $scope.game.countdown -= 1;
+        }
 
         $scope.newGame = function() {
             $scope.game = GameObject();
@@ -72,13 +75,17 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ge
                 $scope.game.input2 = null;
                 $scope.game.countdown = 10;
 
+                // setInterval(function() {
+                //     console.log("delayed");
+                // }, 1000);
+
+                $interval( function() {
+                    $scope.game.countdown--;
+                }, 1000, 10);
+
                 console.log("new game created");
             });
         }
-
-        // $scope.player2Bind = function(game) {
-        //     $
-        // }
 
         $scope.findGame = function() {
             var games = Games();
