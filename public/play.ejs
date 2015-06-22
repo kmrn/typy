@@ -10,13 +10,13 @@
       <h2 class="page-title" ng-hide="game.countdown < 1">Game begins in {{ game.countdown }}.</h2>
       <h1 class="page-title" ng-show="game.countdown < 1">GO!</h1>
       <hr>
-      <pre><code ng-if="game.time === 0">{{ game.phrase }}</code></pre>
+      <pre><code ng-if="game.countdown < 1">{{ game.phrase }}</code></pre>
       <hr>
       <form>
-        <label for="player1">{{ game.player1 }}</label>
-        <input class="u-full-width" type="text" ng-model="game.input1" ng-change="update1()" placeholder="You" id="player1">
-        <label for="player2">{{ game.player2 }}</label>
-        <input class="u-full-width" type="text" ng-model="game.input2" ng-change="update2()" placeholder="Your Opponent" id="player2">
+        <label for="player1input">{{ game.player1 }}</label>
+        <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="You" id="player1input">
+        <label for="player2input">{{ game.player2 }}</label>
+        <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="Your Opponent" id="player2input">
       </form>
     </div>
   </div>
