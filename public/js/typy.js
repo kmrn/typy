@@ -25,6 +25,15 @@ app.factory("Games", ["$firebaseArray",
     }
 ]);
 
+app.factory("GetGame", ["$firebaseObject", 
+    function($firebaseObject) {
+        return function(gameId) {
+            var ref = new Firebase("https://typy.firebaseio.com/games/" + gameId);
+            return $firebaseObject(ref);
+        }
+    }
+]);
+
 app.factory("GameObject", ["$firebaseObject",
     function($firebaseObject) {
         return function() {
@@ -35,8 +44,8 @@ app.factory("GameObject", ["$firebaseObject",
     }
 ]);
 
-app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "GameObject",
-    function($scope, Auth, Profile, Library, Games, GameObject) {
+app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "GetGame", "GameObject",
+    function($scope, Auth, Profile, Library, Games, GetGame, GameObject) {
 
         $scope.auth = Auth;
 
@@ -58,7 +67,7 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ga
             $scope.game.$bindTo($scope, "game").then( function(ref) {
                 $scope.game.phrase = Library();
                 $scope.game.player1 = $scope.user.displayName;
-                $scope.game.player2 = null;
+                $scope.game.player2 = "...";
                 $scope.game.input1 = null;
                 $scope.game.input2 = null;
                 $scope.game.countdown = 10;
@@ -67,12 +76,9 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ga
             });
         }
 
-        $scope.player2Bind = function() {
-            $scope.game.$bindTo($scope, "game").then( function(ref) {
-                $scope.game.player2 = $scope.user.displayName;
-                console.log("game joined as player 2");
-            });
-        }
+        // $scope.player2Bind = function(game) {
+        //     $
+        // }
 
         $scope.findGame = function() {
             var games = Games();
@@ -80,14 +86,19 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ga
             games.$loaded().then(function(games) {
 
                 for(var i = 0, len = games.length; i < len; i++) {
-                    if (games[i].player2 === null) {
+                    if (games[i].player2 === "...") {
                         joined = true;
-                        player2Bind();
+                        $scope.game = GetGame(games[i].$id);
+                        $scope.game.$bindTo($scope, "game").then( function(ref) {
+                            $scope.game.player2 = $scope.user.displayName;
+                            console.log("game joined as player 2");
+                        });
+                        //$scope.player2Bind($scope.game);
                     }
                 }
 
                 if (!joined) {
-                    newGame();
+                    $scope.newGame();
                 }
             });
         }
