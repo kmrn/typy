@@ -79,10 +79,6 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                 //     console.log("delayed");
                 // }, 1000);
 
-                $interval( function() {
-                    $scope.game.countdown--;
-                }, 1000, 10);
-
                 console.log("new game created");
             });
         }
@@ -98,6 +94,9 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                         $scope.game = GetGame(games[i].$id);
                         $scope.game.$bindTo($scope, "game").then( function(ref) {
                             $scope.game.player2 = $scope.user.displayName;
+                            $interval( function() {
+                                $scope.game.countdown--;
+                            }, 1000, 10);
                             console.log("game joined as player 2");
                         });
                         //$scope.player2Bind($scope.game);
