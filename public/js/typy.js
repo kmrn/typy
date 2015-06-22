@@ -109,6 +109,20 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
             });
         }
 
+        $scope.isDisabled = function() {
+            if ($scope.game != undefined) {
+                if ($scope.game.countdown > 0) {
+                    return true;
+                } else if ($scope.game.input1 === $scope.game.phrase) {
+                    return true;
+                } else if ($scope.game.input1 === $scope.game.phrase) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
         $scope.findGame();
 
         $scope.update1 = function() {

@@ -6,7 +6,7 @@
       <hr>
       <a class="u-full-width button button-primary">Play as a Guest</a>
     </div>
-    <div ng-if="authData" class="game-container">
+    <div ng-if="authData" class="game-container" oncopy="return false" oncut="return false" onpaste="return false">
       <h2 class="page-title" ng-hide="game.countdown < 1">Game begins in {{ game.countdown }}.</h2>
       <h1 class="page-title" ng-show="game.countdown < 1">GO!</h1>
       <hr>
@@ -15,10 +15,26 @@
       <hr>
       <form>
         <label for="player1input">{{ game.player1 }}</label>
-        <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="You" id="player1input">
+        <input 
+          class="u-full-width" 
+          type="text"
+          ng-disabled="isDisabled()"
+          ng-model="game.input1"
+          ng-change placeholder="You"
+          id="player1input">
         <label for="player2input">{{ game.player2 }}</label>
-        <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="Your Opponent" id="player2input">
+        <input 
+          class="u-full-width" 
+          type="text" 
+          ng-disabled="isDisabled()" 
+          ng-model="game.input2" 
+          ng-change placeholder="Your Opponent" 
+          id="player2input">
       </form>
+      <div>
+        <h1 ng-if="game.input1 === game.phrase">{{ game.player1 }} wins!</h1>
+        <h1 ng-if="game.input2 === game.phrase">{{ game.player2 }} wins!</h1>
+      </div>
     </div>
   </div>
 </div>
