@@ -142,6 +142,30 @@ pre code {
   background-color: #43A047;
 }
 
+.dashboard-title {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.stats {
+  background-color: #fff;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  @include raised();
+}
+
+#player-rank {
+  font-weight: bold;
+  font-size: 10em;
+}
+
+.personal-records {
+  text-align: center;
+  padding-top: 100px;
+  margin: 0 auto;
+  //max-width: 700px;
+}
+
 
 
 footer {
@@ -152,7 +176,6 @@ footer {
 
   text-align: center;
 }
-
 
 .hidden {
   display: none;

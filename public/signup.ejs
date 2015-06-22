@@ -1,19 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="login-container">
+    <div ng-controller="authCtrl" class="login-container">
       <div class="signup-form-container">
         <h3 class="page-title">Sign Up</h3>
         <hr>
-        <form id="signup-form" method="login" name="signup" class="login-form">
-          <input name="username" id="signup-username" type="text" placeholder="Display Name" class="u-full-width">
-          <input name="email" id="signup-email" type="email" placeholder="Email" class="u-full-width">
-          <input name="password" id="signup-password" type="password" placeholder="Password" class="u-full-width">
-          <input type="button" value="Sign Up" id="signup-submit" onclick="authenticatePassword()" class="button-primary">
+        <form ng-submit="createUser()" id="login-form" class="login-form">
+          <input id="signup-username" type="text" placeholder="Display Name" class="u-full-width" ng-model="displayName" required>
+          <input id="signup-email" type="email" placeholder="Email" class="u-full-width" ng-model="email" required>
+          <input id="signup-password" type="password" placeholder="Password" class="u-full-width" ng-model="password" required>
+          <input type="submit" value="Sign Up" id="signup-submit" class="button-primary">
         </form>
         <hr>
         <a href="/login.html">Log In to an Existing Account</a><br>
       </div>
-      <h3 class="success-text page-title hidden">Success!</h3>
     </div>
   </div>
 </div>

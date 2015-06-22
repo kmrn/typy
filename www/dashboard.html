@@ -40,20 +40,36 @@
 
   <main class="main">
     <!-- inject main views -->
+    <div ng-controller="authCtrl">
+  <div class="container">
+    <div class="row">
+      <h3 class="page-title dashboard-title">Hello, {{ user.displayName }}!</h3>
+      <br>
+    </div>
+  </div>
+  <div class="stats">
     <div class="container">
-  <div class="row">
-    <div ng-controller="authCtrl" class="login-container">
-      <div ng-hide="authData" class="login-form-container">
-        <h3 class="page-title">Login</h3>
-        <hr>
-        <form ng-submit="login()" id="login-form" class="login-form">
-          <input id="login-email" type="email" placeholder="Email" class="u-full-width" ng-model="email" required>
-          <input id="login-password" type="password" placeholder="Password" class="u-full-width" ng-model="password" required>
-          <input type="submit" value="Login" id="login-submit" class="button-primary">
-        </form>
-        <hr>
-        <a href="/signup.html">Create an Account</a><br>
-        <a href="/forgot.html">Forgot your password?</a>
+      <div class="row">
+        <div class="six columns">
+          <h4>Player Rank</h4>
+          <h1 class="u-text-center" id="player-rank">26</h1>
+        </div>
+        <div class="six columns">
+          <h4>Win/Loss Ratio</h4>
+          <!-- <div id="donut_single" style="height: 300px;"></div> -->
+          <h1 class="u-text-center">Sick Pie Chart</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="personal-records">
+        <h4>Personal Records</h4>
+        <ul>
+          <li>Fastest Win: {{ user.fastest }}</li>
+          <li>Longest Match: {{ user.longest }}</li>
+        </ul>
       </div>
     </div>
   </div>

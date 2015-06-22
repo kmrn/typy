@@ -16,14 +16,16 @@
     var app = angular.module("typy", ["firebase"]);
   </script>
   <script src="js/auth.js"></script>
+  <script src="js/typy.js"></script>
 </head>
 <body ng-app="typy">
   <header class="header">
     <div ng-controller="authCtrl" class="login-status">
-      <div ng-show="authData !== null" class="login-buttons">
+      <div ng-if="authData" class="login-buttons">
+        <a href="/dashboard.html" alt="Dashboard">Dashboard</a>
         <a ng-click="logout()" class="button">Logout</a>
       </div>
-      <div ng-show="authData === null" class="login-buttons">
+      <div ng-if="authData === null" class="login-buttons">
         <a href="/login.html" class="button">Login</a>
         <a href="/signup.html" class="button button-primary">Sign Up</a>
       </div>
@@ -39,18 +41,26 @@
   <main class="main">
     <!-- inject main views -->
     <div class="container">
-  <div class="row">
-    <h2 class="page-title">Game begins in 10.</h2>
-    <hr>
-    <pre><code>The quick brown fox.</code></pre>
-    <hr>
-    <form>
-      <input class="u-full-width" type="email" placeholder="You" id="player1">
-      <input class="u-full-width" type="email" placeholder="Your Opponent" id="player2">
-      <div class="start">
-        <button class="submit button-primary" type="submit">SUBMIT</button>
-      </div>
-    </form>
+  <div ng-controller="gameCtrl" class="row">
+    <div ng-if="authData === null" class="login-container">
+      <a href="/login.html" class="u-full-width button button-primary">Login</a>
+      <a href="/signup.html" class="u-full-width button button-primary">Sign Up</a>
+      <hr>
+      <a class="u-full-width button button-primary">Play as a Guest</a>
+    </div>
+    <div ng-if="authData" class="game-container">
+      <h2 class="page-title" ng-hide="game.countdown < 1">Game begins in {{ game.countdown }}.</h2>
+      <h1 class="page-title" ng-show="game.countdown < 1">GO!</h1>
+      <hr>
+      <pre><code ng-if="game.time === 0">{{ game.phrase }}</code></pre>
+      <hr>
+      <form>
+        <label for="player1">{{ game.player1 }}</label>
+        <input class="u-full-width" type="text" ng-model="game.input1" ng-change="update1()" placeholder="You" id="player1">
+        <label for="player2">{{ game.player2 }}</label>
+        <input class="u-full-width" type="text" ng-model="game.input2" ng-change="update2()" placeholder="Your Opponent" id="player2">
+      </form>
+    </div>
   </div>
 </div>
   </main>
@@ -58,9 +68,14 @@
   <footer>
     <div class="container">
       <div class="row">
-        &copy;2015 Kamran64
+        &copy;2015 Kamran64 
       </div>
-    </div>
+      <!-- <hr />
+      <div class="row">
+        <p>If you like Typy, please support it by donating!</p>
+        <a class="button button-primary">Donate</a>
+      </div> -->
+    </div>  
   </footer>
 
   

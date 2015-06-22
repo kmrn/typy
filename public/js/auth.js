@@ -3,15 +3,38 @@
 
 app.factory("Auth", ["$firebaseAuth",
     function($firebaseAuth) {
-        var ref = new Firebase("https://typy.firebaseio.com");
+        var ref = new Firebase("https://typy.firebaseio.com/");
         return $firebaseAuth(ref);
     }
 ]);
 
-app.controller("authCtrl", ["$scope", "Auth",
-    function($scope, Auth) {
+app.factory("Profile", ["$firebaseObject",
+    function($firebaseObject) {
+        return function(uid) {
+            // create a reference to the Firebase database where we will store our data
+            var ref = new Firebase("https://typy.firebaseio.com/users/");
+            var profileRef = ref.child(uid);
 
-        $scope.authData = null;
+            // return it as a synchronized object
+            return $firebaseObject(profileRef);
+        }
+    }
+]);
+
+app.controller("authCtrl", ["$scope", "Auth", "Profile",
+    function($scope, Auth, Profile) {
+
+        $scope.auth = Auth;
+
+        if (Auth.$getAuth() !== null) {
+            $scope.user = Profile(Auth.$getAuth().uid);
+        }
+
+        // any time auth status updates, add the user data to scope
+        $scope.auth.$onAuth(function(authData) {
+            $scope.authData = authData;
+        });
+            
 
         $scope.login = function() {
             
@@ -22,47 +45,34 @@ app.controller("authCtrl", ["$scope", "Auth",
                 password: $scope.password
             }).then(function(authData) {
                 console.log("Logged in as: ", authData.uid);
-                window.location.replace("/");
+                user = Profile(Auth.$getAuth().uid)
+                window.location.replace("/dashboard.html");
             }).catch(function(error) {
                 console.error("Authentication failed: ", error);
             });
         };
 
-
         $scope.createUser = function() {
             $scope.error = null;
 
             Auth.$createUser({
-                username: $scope.username,
                 email: $scope.email,
                 password: $scope.password
             }).then(function(authData) {
-                $scope.message = "User created with uid: " + authData.uid;
+                console.log("User created with id: ", authData.uid);
+                user = Profile(authData.uid);
+                user.displayName = $scope.displayName;
+                user.$save().then(function(ref) {
+                    ref.key() === user.$id; // true
+                }, function(error) {
+                    console.log("Error:", error);
+                });
+                $scope.login();
             }).catch(function(error) {
-                $scope.error = error;
+                console.error("Authentication failed: ", error);
             });
         };
 
-        // $scope.removeUser = function() {
-        //     $scope.message = null;
-        //     $scope.error = null;
-
-        //     Auth.$removeUser({
-        //         email: $scope.email,
-        //         passsword: $scope.password
-        //     }).then(function() {
-        //         $scope.message = "User removed";
-        //     }).catch(function(error) {
-        //         $scope.error = error;
-        //     });
-        // };
-
-
-        // if ($scope.authData) {
-        //     console.log("User " + authData.uid + " is logged in with " + authData.provider);
-        // } else {
-        //     console.log("User is logged out");
-        // }
 
         $scope.logout = function() {
             Auth.$unauth();
@@ -70,5 +80,30 @@ app.controller("authCtrl", ["$scope", "Auth",
         };
 
         authData = Auth.$getAuth();
+        
+
+        $scope.authStatus = function() {
+            if (authData) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        //user = Profile(authData.uid);
+
+
+        if (authData) {
+            if (window.location.pathname == '/login.html' || window.location.pathname == '/signup.html') {
+                window.location.replace('/dashboard.html');
+            }
+            
+
+        } else {
+            if (window.location.pathname == '/dashboard.html') {
+                window.location.replace('/login.html');
+            }
+        }
     }
 ]);
+

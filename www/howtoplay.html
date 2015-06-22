@@ -16,14 +16,16 @@
     var app = angular.module("typy", ["firebase"]);
   </script>
   <script src="js/auth.js"></script>
+  <script src="js/typy.js"></script>
 </head>
 <body ng-app="typy">
   <header class="header">
     <div ng-controller="authCtrl" class="login-status">
-      <div ng-show="authData !== null" class="login-buttons">
+      <div ng-if="authData" class="login-buttons">
+        <a href="/dashboard.html" alt="Dashboard">Dashboard</a>
         <a ng-click="logout()" class="button">Logout</a>
       </div>
-      <div ng-show="authData === null" class="login-buttons">
+      <div ng-if="authData === null" class="login-buttons">
         <a href="/login.html" class="button">Login</a>
         <a href="/signup.html" class="button button-primary">Sign Up</a>
       </div>
@@ -48,7 +50,7 @@
         <li>There are two text boxes, one above the other.</li>
         <li>The text box at the top is yours, the one below it is your opponent's.</li>
         <li>You can edit both text boxes and so can you're opponent.</li>
-        <li>The first person to type in the entire phrase correctly and hit the submit button wins!</li>
+        <li>The first person to type in the entire phrase correctly wins!</li>
       </ul>
     </div>
     <p>Now that you've got a decent idea of how to play, its time to play for real! Click that button down there or click "Play" at the top of this page to start playing Typy.</p>
@@ -60,9 +62,14 @@
   <footer>
     <div class="container">
       <div class="row">
-        &copy;2015 Kamran64
+        &copy;2015 Kamran64 
       </div>
-    </div>
+      <!-- <hr />
+      <div class="row">
+        <p>If you like Typy, please support it by donating!</p>
+        <a class="button button-primary">Donate</a>
+      </div> -->
+    </div>  
   </footer>
 
   
