@@ -18,22 +18,22 @@
       <h5 class="page-title" ng-if="game.player2 === '...'">... Waiting for Player 2 ...</h5>
       <hr>
       <div ng-hide="isDisabled()">
-        <form ng-if="user.displayName === game.player1">
-          <label for="player1input">{{ game.player1 }}</label>
+        <form ng-if="user.$id === game.player1">
+          <label for="player1input">{{ game.player1name }}</label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="You" id="player1input">
-          <label for="player2input">{{ game.player2 }}</label>
+          <label for="player2input">{{ game.player2name }}</label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="Your Opponent" id="player2input">
         </form>
-        <form ng-if="user.displayName === game.player2">
-          <label for="player2input">{{ game.player2 }}</label>
+        <form ng-if="user.$id === game.player2">
+          <label for="player2input">{{ game.player2name }}</label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="You" id="player2input">
-          <label for="player1input">{{ game.player1 }}</label>
+          <label for="player1input">{{ game.player1name }}</label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="Your Opponent" id="player1input">
         </form>
       </div>
       <div>
-        <h1 ng-if="game.input1 === game.phrase" class="page-title">{{ game.player1 }} wins!</h1>
-        <h1 ng-if="game.input2 === game.phrase" class="page-title">{{ game.player2 }} wins!</h1>
+        <h1 ng-if="game.input1 === game.phrase" class="page-title">{{ game.player1name }} wins!</h1>
+        <h1 ng-if="game.input2 === game.phrase" class="page-title">{{ game.player2name }} wins!</h1>
       </div>
     </div>
   </div>

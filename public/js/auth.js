@@ -35,6 +35,12 @@ app.controller("authCtrl", ["$scope", "Auth", "Profile",
             $scope.authData = authData;
         });
             
+        // $scope.userExists = function(userId) {
+        //     var usersRef = new Firebase("https://typy.firebaseio.com/users/");
+        //     usersRef.child(userId).once('value', function(snapshot) {
+        //         return (snapshot.val().displayName !== null);
+        //     });
+        // }
 
         $scope.login = function() {
             

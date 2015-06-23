@@ -27,9 +27,18 @@ app.factory("Games", ["$firebaseArray",
 
 app.factory("GetGame", ["$firebaseObject", 
     function($firebaseObject) {
-        return function(gameId) {
+        return function(gameId, remove) {
             var ref = new Firebase("https://typy.firebaseio.com/games/" + gameId);
-            return $firebaseObject(ref);
+            var obj = $firebaseObject(ref);
+            if (remove) {
+                obj.$remove().then(function(ref) {
+                    // data has been deleted locally and in the Firebase database
+                }, function(error) {
+                    console.log("Error:", error);
+                });
+            } else {
+                return obj;
+            }
         }
     }
 ]);
@@ -91,7 +100,7 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                 for(var i = 0, len = games.length; i < len; i++) {
                     if (games[i].player2 === "...") {
                         joined = true;
-                        $scope.game = GetGame(games[i].$id);
+                        $scope.game = GetGame(games[i].$id, false);
                         $scope.game.$bindTo($scope, "game").then( function(ref) {
                             if ($scope.game.player1 === $scope.user.displayName) {
                                 joined = false;
@@ -122,21 +131,18 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
         }
 
         $scope.destroyGame = function() {
-            $scope.game.$remove();
+            GetGame($scope.game.$id, true);
         }
 
         $scope.findGame();
 
-        // window.onbeforeunload = function(){
-        //     $scope.game.$remove().then(function(ref) {
-        //     }, function(error) {
-        //     });
-        // }
-        // $scope.$on('$locationChangeStart', function(event, next, current) {
-        //     $scope.game.$remove().then(function(ref) {
-        //     }, function(error) {
-        //     });
-        // });
+
+        function closeIt()
+        {
+            $scope.destroyGame();
+            return "Leaving this page will end the game and destroy the game data.";
+        }
+        window.onbeforeunload = closeIt;
     }
 ]);
 
