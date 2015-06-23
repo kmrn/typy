@@ -93,11 +93,17 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                         joined = true;
                         $scope.game = GetGame(games[i].$id);
                         $scope.game.$bindTo($scope, "game").then( function(ref) {
-                            $scope.game.player2 = $scope.user.displayName;
-                            $interval( function() {
-                                $scope.game.countdown--;
-                            }, 1000, 10);
-                            console.log("game joined as player 2");
+                            if ($scope.game.player1 === $scope.user.displayName) {
+                                joined = false;
+                                $scope.game.$remove();
+                            } else {
+                                $scope.game.player2 = $scope.user.displayName;
+
+                                $interval( function() {
+                                    $scope.game.countdown--;
+                                }, 1000, 10);
+                                console.log("game joined as player 2");
+                            }
                         });
                         //$scope.player2Bind($scope.game);
                     }
@@ -110,27 +116,52 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
         }
 
         $scope.isDisabled = function() {
-            if ($scope.game != undefined) {
-                if ($scope.game.countdown > 0) {
+            if ($scope.game != undefined)
+                if ($scope.game.input1 === $scope.game.phrase || $scope.game.input2 === $scope.game.phrase)
                     return true;
-                } else if ($scope.game.input1 === $scope.game.phrase) {
-                    return true;
-                } else if ($scope.game.input1 === $scope.game.phrase) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+        }
+
+        $scope.destroyGame = function() {
+            $scope.game.$remove();
         }
 
         $scope.findGame();
 
-        $scope.update1 = function() {
-            console.log("update1 was called");
+        function closeIt()
+        {
+            $scope.game.$remove();
+            return "Any string value here forces a dialog box to \n" + 
+                "appear before closing the window.";
         }
-
-        $scope.update2 = function() {
-            console.log("update2 was called");
-        }   
+        window.onbeforeunload = closeIt;
+        // window.onbeforeunload = function(){
+        //     $scope.game.$remove().then(function(ref) {
+        //     }, function(error) {
+        //     });
+        // }
+        // $scope.$on('$locationChangeStart', function(event, next, current) {
+        //     $scope.game.$remove().then(function(ref) {
+        //     }, function(error) {
+        //     });
+        // });
     }
 ]);
+
+// angular.module("", []).directive('confirmOnExit', function() {
+//     return {
+//         link: function($scope, elem, attrs) {
+//             window.onbeforeunload = function(){
+//                 if ($scope.myForm.$dirty) {
+//                     return "The form is dirty, do you want to stay on the page?";
+//                 }
+//             }
+//             $scope.$on('$locationChangeStart', function(event, next, current) {
+//                 if ($scope.myForm.$dirty) {
+//                     if(!confirm("The form is dirty, do you want to stay on the page?")) {
+//                         event.preventDefault();
+//                     }
+//                 }
+//             });
+//         }
+//     };
+// });

@@ -44,8 +44,8 @@ app.factory("GameObject", ["$firebaseObject",
     }
 ]);
 
-app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "GetGame", "GameObject",
-    function($scope, Auth, Profile, Library, Games, GetGame, GameObject) {
+app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library", "Games", "GetGame", "GameObject",
+    function($scope, $interval, Auth, Profile, Library, Games, GetGame, GameObject) {
 
         $scope.auth = Auth;
 
@@ -60,6 +60,9 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ge
 
         $scope.game;
 
+        $scope.count = function() {
+            $scope.game.countdown -= 1;
+        }
 
         $scope.newGame = function() {
             $scope.game = GameObject();
@@ -72,13 +75,13 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ge
                 $scope.game.input2 = null;
                 $scope.game.countdown = 10;
 
+                // setInterval(function() {
+                //     console.log("delayed");
+                // }, 1000);
+
                 console.log("new game created");
             });
         }
-
-        // $scope.player2Bind = function(game) {
-        //     $
-        // }
 
         $scope.findGame = function() {
             var games = Games();
@@ -90,8 +93,17 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ge
                         joined = true;
                         $scope.game = GetGame(games[i].$id);
                         $scope.game.$bindTo($scope, "game").then( function(ref) {
-                            $scope.game.player2 = $scope.user.displayName;
-                            console.log("game joined as player 2");
+                            if ($scope.game.player1 === $scope.user.displayName) {
+                                joined = false;
+                                $scope.game.$remove();
+                            } else {
+                                $scope.game.player2 = $scope.user.displayName;
+
+                                $interval( function() {
+                                    $scope.game.countdown--;
+                                }, 1000, 10);
+                                console.log("game joined as player 2");
+                            }
                         });
                         //$scope.player2Bind($scope.game);
                     }
@@ -103,14 +115,46 @@ app.controller("gameCtrl", ["$scope", "Auth", "Profile", "Library", "Games", "Ge
             });
         }
 
-        $scope.findGame();
-
-        $scope.update1 = function() {
-            console.log("update1 was called");
+        $scope.isDisabled = function() {
+            if ($scope.game != undefined)
+                if ($scope.game.input1 === $scope.game.phrase || $scope.game.input2 === $scope.game.phrase)
+                    return true;
         }
 
-        $scope.update2 = function() {
-            console.log("update2 was called");
-        }   
+        $scope.destroyGame = function() {
+            $scope.game.$remove();
+        }
+
+        $scope.findGame();
+
+        // window.onbeforeunload = function(){
+        //     $scope.game.$remove().then(function(ref) {
+        //     }, function(error) {
+        //     });
+        // }
+        // $scope.$on('$locationChangeStart', function(event, next, current) {
+        //     $scope.game.$remove().then(function(ref) {
+        //     }, function(error) {
+        //     });
+        // });
     }
 ]);
+
+// angular.module("", []).directive('confirmOnExit', function() {
+//     return {
+//         link: function($scope, elem, attrs) {
+//             window.onbeforeunload = function(){
+//                 if ($scope.myForm.$dirty) {
+//                     return "The form is dirty, do you want to stay on the page?";
+//                 }
+//             }
+//             $scope.$on('$locationChangeStart', function(event, next, current) {
+//                 if ($scope.myForm.$dirty) {
+//                     if(!confirm("The form is dirty, do you want to stay on the page?")) {
+//                         event.preventDefault();
+//                     }
+//                 }
+//             });
+//         }
+//     };
+// });
