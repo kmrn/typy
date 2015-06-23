@@ -159,6 +159,17 @@ pre code {
   font-size: 10em;
 }
 
+@media (max-width: 1000px) {
+  #player-rank {
+    font-size: 6em;
+  }
+}
+@media (max-width: 750px) {
+  #player-rank {
+    font-size: 4em;
+  }
+}
+
 .personal-records {
   text-align: center;
   padding-top: 100px;
