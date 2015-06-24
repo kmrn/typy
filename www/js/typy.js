@@ -68,6 +68,7 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
         });
 
         $scope.game;
+        $scope.gameOver = false;
 
         $scope.count = function() {
             $scope.game.countdown -= 1;
@@ -78,15 +79,14 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
 
             $scope.game.$bindTo($scope, "game").then( function(ref) {
                 $scope.game.phrase = Library();
-                $scope.game.player1 = $scope.user.displayName;
+                $scope.game.player1 = $scope.user.$id;
+                $scope.game.player1name = $scope.user.displayName;
                 $scope.game.player2 = "...";
+                $scope.game.player2name = null;
                 $scope.game.input1 = null;
                 $scope.game.input2 = null;
+                $scope.game.winner = null;
                 $scope.game.countdown = 10;
-
-                // setInterval(function() {
-                //     console.log("delayed");
-                // }, 1000);
 
                 console.log("new game created");
             });
@@ -102,11 +102,11 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                         joined = true;
                         $scope.game = GetGame(games[i].$id, false);
                         $scope.game.$bindTo($scope, "game").then( function(ref) {
-                            if ($scope.game.player1 === $scope.user.displayName) {
+                            if ($scope.game.player1 === $scope.user.$id) {
                                 joined = false;
-                                $scope.game.$remove();
                             } else {
-                                $scope.game.player2 = $scope.user.displayName;
+                                $scope.game.player2 = $scope.user.$id;
+                                $scope.game.player2name = $scope.user.displayName;
 
                                 $interval( function() {
                                     $scope.game.countdown--;
@@ -114,7 +114,6 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                                 console.log("game joined as player 2");
                             }
                         });
-                        //$scope.player2Bind($scope.game);
                     }
                 }
 
@@ -125,42 +124,57 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
         }
 
         $scope.isDisabled = function() {
-            if ($scope.game != undefined)
-                if ($scope.game.input1 === $scope.game.phrase || $scope.game.input2 === $scope.game.phrase)
+            if ($scope.game != undefined) {
+                if ($scope.game.input1 === $scope.game.phrase || $scope.game.input2 === $scope.game.phrase) {
+                    
+                    if ($scope.game.input1 === $scope.game.phrase) {
+                        $scope.game.winner = $scope.game.player1;
+                        
+                    }
+
+                    if ($scope.game.input2 === $scope.game.phrase) {
+                        $scope.game.winner = $scope.game.player2;                        $scope.gameOver = 1;
+                    }
+
+                    $scope.gameOver = true;
                     return true;
+                }
+            }
         }
 
         $scope.destroyGame = function() {
             GetGame($scope.game.$id, true);
+            $scope.gameOver = false;
         }
 
         $scope.findGame();
 
+        $scope.$watch('gameOver', function() {
+
+            if ($scope.game.winner != undefined) {
+                if ($scope.user.$id === $scope.game.winner) {
+                    $scope.user.wins += 1;
+                    $scope.user.$save();
+                    console.log("you win");
+                }
+
+                if ($scope.user.$id !== $scope.game.winner) {
+                    $scope.user.losses += 1;
+                    $scope.user.$save();
+                    console.log("you lose");
+                }
+
+                console.log("The game is over.");
+            }
+        });
 
         function closeIt()
         {
             $scope.destroyGame();
-            return "Leaving this page will end the game and destroy the game data.";
+            return "Leaving this page during a game will end the game and destroy the game data.";
         }
+
         window.onbeforeunload = closeIt;
+   
     }
 ]);
-
-// angular.module("", []).directive('confirmOnExit', function() {
-//     return {
-//         link: function($scope, elem, attrs) {
-//             window.onbeforeunload = function(){
-//                 if ($scope.myForm.$dirty) {
-//                     return "The form is dirty, do you want to stay on the page?";
-//                 }
-//             }
-//             $scope.$on('$locationChangeStart', function(event, next, current) {
-//                 if ($scope.myForm.$dirty) {
-//                     if(!confirm("The form is dirty, do you want to stay on the page?")) {
-//                         event.preventDefault();
-//                     }
-//                 }
-//             });
-//         }
-//     };
-// });
