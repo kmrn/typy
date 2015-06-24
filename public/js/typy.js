@@ -147,7 +147,9 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
             $scope.gameOver = false;
         }
 
-        $scope.findGame();
+        if (authData) {
+            $scope.findGame();
+        }
 
         $scope.$watch('gameOver', function() {
 
