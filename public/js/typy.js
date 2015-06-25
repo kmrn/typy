@@ -172,11 +172,16 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
 
         function closeIt()
         {
-            $scope.destroyGame();
             return "Leaving this page during a game will end the game and destroy the game data.";
         }
 
         window.onbeforeunload = closeIt;
-   
+
+        function closed()
+        {
+            $scope.destroyGame();
+        }
+        
+        window.onunload = closed;
     }
 ]);
