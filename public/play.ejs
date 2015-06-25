@@ -1,5 +1,14 @@
 <div class="container">
   <div ng-controller="gameCtrl" class="row">
+    <!-- Typy In Game Header -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8593968956647437"
+         data-ad-slot="3676540314"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <div ng-if="authData === null" class="login-container">
       <div class="login-form">
         <p class="page-title opacity-half">Make an account so you can get a cool display name and track your wins!</p>
@@ -21,15 +30,15 @@
       <hr>
       <div ng-hide="isDisabled()">
         <form ng-if="user.$id === game.player1">
-          <label for="player1input">{{ game.player1name }} <span class="gold-flair" ng-if="user.gold">GOLD MEMBER</span></label>
+          <label for="player1input">{{ game.player1name }} <!-- <span class="gold-flair" ng-if="Profile(player1).gold">GOLD MEMBER</span> --></label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="You" id="player1input">
-          <label for="player2input">{{ game.player2name }} <span class="gold-flair" ng-if="Profile(player2).gold">GOLD MEMBER</span></label>
+          <label for="player2input">{{ game.player2name }} <!-- <span class="gold-flair" ng-if="Profile(player2).gold">GOLD MEMBER</span> --></label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="Your Opponent" id="player2input">
         </form>
         <form ng-if="user.$id === game.player2">
-          <label for="player2input">{{ game.player2name }} <span class="gold-flair" ng-if="Profile(player2).gold">GOLD MEMBER</span></label>
+          <label for="player2input">{{ game.player2name }} <!-- <span class="gold-flair" ng-if="Profile(player2).gold">GOLD MEMBER</span> --></label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="You" id="player2input">
-          <label for="player1input">{{ game.player1name }} <span class="gold-flair" ng-if="user.gold">GOLD MEMBER</span></label>
+          <label for="player1input">{{ game.player1name }} <!-- <span class="gold-flair" ng-if="Profile(player1).gold">GOLD MEMBER</span> --></label>
           <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="Your Opponent" id="player1input">
         </form>
       </div>
@@ -38,5 +47,14 @@
         <h1 ng-if="game.input2 === game.phrase" class="page-title">{{ game.player2name }} wins!</h1>
       </div>
     </div>
+    <!-- Typy In Game Footer -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8593968956647437"
+         data-ad-slot="5153273516"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 </div>
