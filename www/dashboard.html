@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Typy: A typing game!</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   
-  <!-- Angular/Firebase Libraries -->
+  <!-- External Libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.2.6/firebase.js"></script>
   <script src="https://cdn.firebase.com/libs/angularfire/1.1.1/angularfire.min.js"></script>
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- // <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+  
 
   <!-- Javascripts -->
+  <!-- // <script type="text/javascript" src="js/materialize.min.js"></script> -->
   <script>
     var app = angular.module("typy", ["firebase"]);
   </script>
@@ -21,7 +25,7 @@
 </head>
 <body ng-app="typy">
   <header class="header">
-    <div ng-controller="authCtrl" class="login-status">
+    <div ng-cloak ng-controller="authCtrl" class="login-status">
       <div ng-if="authData" class="login-buttons">
         <a href="/dashboard.html" alt="Dashboard">Dashboard</a>
         <a ng-click="logout()" class="button">Logout</a>
@@ -42,7 +46,8 @@
 
   <main class="main">
     <!-- inject main views -->
-    <div ng-controller="authCtrl">
+    <div ng-cloak>
+      <div ng-controller="authCtrl">
   <div class="container">
     <div class="row">
       <h3 class="page-title dashboard-title">Hello, {{ user.displayName }}!</h3>
@@ -76,6 +81,7 @@
     </div>
   </div>
 </div>
+    </div>
   </main>
 
   <footer>

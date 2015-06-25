@@ -1,7 +1,7 @@
 @import "normalize";
 @import "skeleton";
 @import "mixins";
-
+// @import "materialize";
 
 body {
   background: #f1f1f1;
@@ -61,6 +61,14 @@ pre code {
   padding-top: 50px;
   padding-bottom: 50px;
 
+}
+
+.restrict-width {
+  max-width: 900px;
+}
+
+.narrow {
+  max-width: 800px;
 }
 
 .page-title {
@@ -194,4 +202,23 @@ footer {
 .hidden {
   display: none;
   position: absolute;
+}
+
+.play-sidebar {
+  width: 100%;
+}
+
+.play-content {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.adsense-container {
+  background-color: #fff;
+  min-height: 400px;
+}
+
+.preloader {
+    padding: 50px;
+    background: url('../img/preloader.gif') no-repeat 50% 50% transparent;
 }

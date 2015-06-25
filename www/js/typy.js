@@ -145,6 +145,8 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
         $scope.destroyGame = function() {
             GetGame($scope.game.$id, true);
             $scope.gameOver = false;
+
+            return "Leaving this page ends the game. The game data for this round will be destroyed.";
         }
 
         if (authData) {
@@ -172,16 +174,11 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
 
         function closeIt()
         {
-            return "Leaving this page during a game will end the game and destroy the game data.";
+            if (authData) {
+                return $scope.destroyGame();
+            }
         }
 
         window.onbeforeunload = closeIt;
-
-        function closed()
-        {
-            $scope.destroyGame();
-        }
-        
-        window.onunload = closed;
     }
 ]);
