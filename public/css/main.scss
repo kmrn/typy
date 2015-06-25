@@ -95,6 +95,9 @@ pre code {
   margin-bottom: 40px;
 }
 
+.opacity-half {
+  opacity: 0.5;
+}
 
 .start {
   text-align: center;
@@ -154,7 +157,7 @@ pre code {
   @include raised();
 }
 
-#player-rank {
+.player-rank {
   font-weight: bold;
   font-size: 10em;
 }

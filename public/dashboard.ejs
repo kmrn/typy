@@ -10,12 +10,12 @@
       <div class="row">
         <div class="six columns">
           <h4>Player Rank</h4>
-          <h1 class="u-text-center" id="player-rank">{{ 25 }}</h1>
+          <h1 class="u-text-center player-rank">{{ 25 }}</h1>
         </div>
         <div class="six columns">
           <h4>Win Rate</h4>
           <!-- <div id="donut_single" style="height: 300px;"></div> -->
-          <h1 class="u-text-center" id="player-rank">{{ (user.wins / (user.wins + user.losses)) * 100 | number:1 }}%</h1>
+          <h1 class="u-text-center player-rank">{{ (user.wins / (user.wins + user.losses)) * 100 | number:1 }}%</h1>
         </div>
       </div>
     </div>
