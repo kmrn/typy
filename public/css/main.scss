@@ -171,12 +171,12 @@ pre code {
 }
 
 @media (max-width: 1000px) {
-  #player-rank {
+  .player-rank {
     font-size: 6em;
   }
 }
 @media (max-width: 750px) {
-  #player-rank {
+  .player-rank {
     font-size: 4em;
   }
 }
@@ -202,6 +202,17 @@ footer {
 .hidden {
   display: none;
   position: absolute;
+}
+
+.raised {
+  @include raised();
+}
+
+.pricing {
+  @extend .rules;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px;
 }
 
 .play-sidebar {
