@@ -68,6 +68,9 @@ app.controller("authCtrl", ["$scope", "Auth", "Profile",
                 console.log("User created with id: ", authData.uid);
                 user = Profile(authData.uid);
                 user.displayName = $scope.displayName;
+                user.wins = 0;
+                user.losses = 0;
+                user.gold = false;
                 user.$save().then(function(ref) {
                     ref.key() === user.$id; // true
                 }, function(error) {
