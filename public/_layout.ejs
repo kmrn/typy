@@ -34,9 +34,10 @@
     </div>
     <a href="/" class="logo"><img src="img/typylogosmall.png" alt="Typy" /></a>
     <ul class="navlist">
-      <li><a href="/play.html" alt="Play Typy!">Play</a></li>
-      <li><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
-      <li><a href="/about.html" alt="About Typy">About</a></li>
+      <li class="<%- current.source == 'play' ? 'active' : '' %>"><a href="/play.html" alt="Play Typy!">Play</a></li>
+      <li class="<%- current.source == 'howtoplay' ? 'active' : '' %>"><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
+      <li class="<%- current.source == 'about' ? 'active' : '' %>"><a href="/about.html" alt="About Typy">About</a></li>
+      <li class="<%- current.source == 'gold' ? 'active' : '' %>"><a href="/gold.html" alt="Get Typy Gold">Gold</a></li>
       <li><a href="http://officialtypy.tumblr.com" target="_blank" alt="Official Typy Blog">Blog</a></li>
     </ul>
   </header>
