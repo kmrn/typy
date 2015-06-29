@@ -1,10 +1,9 @@
 @import "normalize";
 @import "skeleton";
 @import "mixins";
-// @import "materialize";
 
 body {
-  background: #f1f1f1;
+  background: $background-color;
 
   display: flex;
   min-height: 100vh;
@@ -44,7 +43,12 @@ header {
 
   .navlist li {
     display: inline;
-    margin: 0 5px;
+    padding: 5px;
+    //margin: 0 5px;
+  }
+
+  .active {
+    background-color: rgba(0,0,0,0.1);
   }
 
   -webkit-box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.5);
@@ -141,6 +145,7 @@ pre code {
   background-color: #fefefe;
   @include raised();
   max-width: 400px;
+  z-index: 2;
 }
 
 .login-form {
@@ -188,7 +193,23 @@ pre code {
   //max-width: 700px;
 }
 
+.invalid {
+  position: relative;
+  background-color: #E53935;
+  color: #fff;
+  max-width: 300px;
+  text-align: center;
+  @include raised();
+  margin: 0 auto;
+  z-index: 1;
+  padding: 10px;
+  padding-top: 20px;
 
+  -webkit-transition: all 500ms ease-in 1s;
+  -moz-transition: all 500ms ease-in 1s;
+  -o-transition: all 500ms ease-in 1s;
+  transition: all 500ms ease-in 1s;
+}
 
 footer {
   @include raised();
@@ -237,3 +258,4 @@ footer {
 .gold-features {
   list-style: none;
 }
+
