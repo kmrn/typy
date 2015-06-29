@@ -5,13 +5,7 @@ app.factory("Library", ["$firebaseArray",
     function($firebaseArray) {
         return function() {
             var ref = new Firebase("https://typy.firebaseio.com/library/");
-            var library = $firebaseArray(ref);
-
-
-
-            var phrase = "The quick brown fox.";
-
-            return phrase;
+            return $firebaseArray(ref);
         }
     }
 ]);
@@ -78,7 +72,10 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
             $scope.game = GameObject();
 
             $scope.game.$bindTo($scope, "game").then( function(ref) {
-                $scope.game.phrase = Library();
+                //$scope.game.phrase = Library();
+                Library().$loaded().then(function(library) {
+                    $scope.game.phrase = library[Math.floor(Math.random() * library.length)].$value;
+                });
                 $scope.game.player1 = $scope.user.$id;
                 $scope.game.player1name = $scope.user.displayName;
                 $scope.game.player2 = "...";
