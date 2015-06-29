@@ -54,6 +54,21 @@ app.controller("authCtrl", ["$scope", "Auth", "Profile",
                 user = Profile(Auth.$getAuth().uid)
                 window.location.replace("/dashboard.html");
             }).catch(function(error) {
+                var element = angular.element( document.querySelector('.invalid') );
+                switch (error.code) {
+                    case "INVALID_EMAIL":
+                        element.removeClass("hidden");
+                        break;
+                    case "INVALID_PASSWORD":
+                        element.removeClass("hidden");
+                        break;
+                    case "INVALID_USER":
+                        element.removeClass("hidden");
+                        break;
+                    default:
+                        element.removeClass("hidden");
+                        break;
+                }
                 console.error("Authentication failed: ", error);
             });
         };
@@ -78,6 +93,15 @@ app.controller("authCtrl", ["$scope", "Auth", "Profile",
                 });
                 $scope.login();
             }).catch(function(error) {
+                var element = angular.element( document.querySelector('.invalid') );
+                switch (error.code) {
+                    case "EMAIL_TAKEN":
+                        element.removeClass("hidden");
+                        break;
+                    default:
+                        element.removeClass("hidden");
+                        break;
+                }
                 console.error("Authentication failed: ", error);
             });
         };

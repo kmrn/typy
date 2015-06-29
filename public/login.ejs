@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div ng-controller="authCtrl" class="login-container">
+  <div ng-controller="authCtrl" class="row">
+    <div class="login-container">
       <div ng-hide="authData" class="login-form-container">
         <h3 class="page-title">Login</h3>
         <hr>
@@ -13,6 +13,9 @@
         <a href="/signup.html">Create an Account</a><br>
         <a href="/forgot.html">Forgot your password?</a>
       </div>
+    </div>
+    <div class="hidden invalid">
+      <p>Incorrect Username or Password</p>
     </div>
   </div>
 </div>
