@@ -24,7 +24,7 @@
   <header class="header">
     <div ng-cloak ng-controller="authCtrl" class="login-status">
       <div ng-if="authData" class="login-buttons">
-        <a href="/dashboard.html" alt="Dashboard">Dashboard</a>
+        <a href="/dashboard.html" alt="Dashboard" class="dashboard-link">Dashboard</a>
         <a ng-click="logout()" class="button">Logout</a>
       </div>
       <div ng-if="authData === null" class="login-buttons">
@@ -36,7 +36,7 @@
     <ul class="navlist">
       <li class=""><a href="/play.html" alt="Play Typy!">Play</a></li>
       <li class=""><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
-      <li class=""><a href="/about.html" alt="About Typy">About</a></li>
+      <!-- <li class=""><a href="/about.html" alt="About Typy">About</a></li> -->
       <li class=""><a href="/gold.html" alt="Get Typy Gold">Gold</a></li>
       <li><a href="http://officialtypy.tumblr.com" target="_blank" alt="Official Typy Blog">Blog</a></li>
     </ul>
@@ -48,28 +48,46 @@
       <div class="container">
 	<div class="row">
     <h1 class="page-title">A RAD TYPING GAME</h1>
-    <pre><code>animated image of the game being played will go here</code></pre>
+    <div class="animated-hero u-text-center">
+      <video poster="#f1f1f1" preload="auto" autoplay="autoplay" muted="muted" loop="loop" webkit-playsinline="" style="width: 718px; height: 404px">
+        <source src="/img/0TQ50unqhF.webm" type="video/webm">
+        <!-- <source src="//i.imgur.com/KoUsfDR.mp4" type="video/mp4"> -->
+
+        <object style="background: #f1f1f1; width: 718px; height: 404px" type="application/x-shockwave-flash" data="//s.imgur.com/include/flash/gifplayer.swf?imgur_video=http://i.imgur.com/KoUsfDR.mp4&amp;imgur_width=718&amp;imgur_height=404&amp;imgur_url=">
+          <param name="movie" value="//s.imgur.com/include/flash/gifplayer.swf?imgur_video=http://i.imgur.com/KoUsfDR.mp4&amp;imgur_width=718&amp;imgur_height=404">
+          <param name="allowscriptaccess" value="never">
+          <param name="flashvars" value="height=404&amp;width=718">
+          <param name="width" value="718">
+          <param name="height" value="404">
+          <param name="version" value="0">
+          <param name="scale" value="scale">
+          <param name="salign" value="tl">
+          <param name="wmode" value="opaque">
+        </object>
+      </source></video>
+    </div>
     <div class="start">
+      <a class="button" href="/howtoplay.html">Learn how to play</a><br>
       <a class="button button-primary" href="/play.html">START PLAYING</a>
     </div>
 	</div>
 </div>
 
-<div class="container high-scores">
+<!-- <div class="container high-scores">
   <div class="row">
     <h3 class="page-title">&mdash; HIGH SCORES &mdash;</h3>
     <h5 class="page-title">&ctdot;  The leaderboard is coming soon!  &ctdot;</h5>
-    <!-- <div class="leaderboard">
+    <div class="leaderboard">
       <table id="leaderboardTable">
         <tr>
           <th>Player</th>
           <th>Score</th>
         </tr>
       </table>
-    </div> -->
+    </div>
   </div>
 </div>
-
+ -->
 <!-- <script src="leaderboard.js"></script> -->
     </div>
   </main>

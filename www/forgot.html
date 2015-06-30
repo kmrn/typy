@@ -36,7 +36,7 @@
     <ul class="navlist">
       <li class=""><a href="/play.html" alt="Play Typy!">Play</a></li>
       <li class=""><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
-      <!-- <li class="active"><a href="/about.html" alt="About Typy">About</a></li> -->
+      <!-- <li class=""><a href="/about.html" alt="About Typy">About</a></li> -->
       <li class=""><a href="/gold.html" alt="Get Typy Gold">Gold</a></li>
       <li><a href="http://officialtypy.tumblr.com" target="_blank" alt="Official Typy Blog">Blog</a></li>
     </ul>
@@ -45,12 +45,21 @@
   <main class="main">
     <!-- inject main views -->
     <div ng-cloak>
-      <div class="container restrict-width">
+      <div class="container">
   <div class="row">
-    <h2 class="page-title">&mdash; About Typy &mdash;</h2>
-    <p>
-      Typy is a game.
-    </p>
+    <div ng-controller="authCtrl" class="login-container">
+      <div class="signup-form-container">
+        <h3 class="page-title">Forgot Password</h3>
+        <hr>
+        <form ng-submit="resetPassword()" id="login-form" class="login-form">
+          <input id="signup-email" type="email" placeholder="Email" class="u-full-width" ng-model="email" required>
+          <input type="submit" value="Reset Password" id="signup-submit" class="button-primary">
+        </form>
+      </div>
+    </div>
+    <div class="hidden invalid">
+      <p>Invalid email.</p>
+    </div>
   </div>
 </div>
     </div>

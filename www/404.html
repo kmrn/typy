@@ -24,7 +24,7 @@
   <header class="header">
     <div ng-cloak ng-controller="authCtrl" class="login-status">
       <div ng-if="authData" class="login-buttons">
-        <a href="/dashboard.html" alt="Dashboard">Dashboard</a>
+        <a href="/dashboard.html" alt="Dashboard" class="dashboard-link">Dashboard</a>
         <a ng-click="logout()" class="button">Logout</a>
       </div>
       <div ng-if="authData === null" class="login-buttons">
@@ -36,7 +36,7 @@
     <ul class="navlist">
       <li class=""><a href="/play.html" alt="Play Typy!">Play</a></li>
       <li class=""><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
-      <li class=""><a href="/about.html" alt="About Typy">About</a></li>
+      <!-- <li class=""><a href="/about.html" alt="About Typy">About</a></li> -->
       <li class=""><a href="/gold.html" alt="Get Typy Gold">Gold</a></li>
       <li><a href="http://officialtypy.tumblr.com" target="_blank" alt="Official Typy Blog">Blog</a></li>
     </ul>

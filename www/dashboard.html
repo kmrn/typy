@@ -24,7 +24,7 @@
   <header class="header">
     <div ng-cloak ng-controller="authCtrl" class="login-status">
       <div ng-if="authData" class="login-buttons">
-        <a href="/dashboard.html" alt="Dashboard">Dashboard</a>
+        <a href="/dashboard.html" alt="Dashboard" class="dashboard-link">Dashboard</a>
         <a ng-click="logout()" class="button">Logout</a>
       </div>
       <div ng-if="authData === null" class="login-buttons">
@@ -36,7 +36,7 @@
     <ul class="navlist">
       <li class=""><a href="/play.html" alt="Play Typy!">Play</a></li>
       <li class=""><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
-      <li class=""><a href="/about.html" alt="About Typy">About</a></li>
+      <!-- <li class=""><a href="/about.html" alt="About Typy">About</a></li> -->
       <li class=""><a href="/gold.html" alt="Get Typy Gold">Gold</a></li>
       <li><a href="http://officialtypy.tumblr.com" target="_blank" alt="Official Typy Blog">Blog</a></li>
     </ul>
@@ -76,6 +76,36 @@
           <li>Fastest Win: {{ user.fastest }}</li>
           <li>Longest Match: {{ user.longest }}</li>
         </ul> -->
+      </div>
+    </div>
+    <hr>
+    <div class="row u-text-center">
+      <div class="dashboard-object">
+        <h4>Change Your Display Name</h4>
+        <p>Don't like your name? Change it. It's that easy.</p>
+        <form name="displayNameChange" ng-submit="changeDisplayName()" id="displayname-form" class="dashboard-form u-block-center">
+          <div class="ten columns"><input id="displayName" type="text" placeholder="{{ user.displayName }}" class="u-full-width" ng-model="displayName" required></div>
+          <div class="two columns"><input type="submit" value="&gt;" id="login-submit" class="u-full-width"></div>
+        </form>
+        <div class="hidden displayname-success">
+          <p>Display Name Changed Successfully!</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row u-text-center">
+      <div class="dashboard-object">
+        <h4>Change Your Password</h4>
+        <p>Whatever the reason is, here you go.</p>
+        <form name="passwordChange" ng-submit="changePassword()" id="change-password-form" class="dashboard-form u-block-center">
+          <input id="oldPassword" type="password" placeholder="Old Password" class="u-full-width" ng-model="oldPassword" required>
+          <input id="newPassword" type="password" placeholder="New Password" class="u-full-width" ng-model="newPassword" required>
+          <input type="submit" value="Change Password" id="login-submit" class="u-full-width">
+        </form>
+        <div class="hidden change-password-success">
+          <p>Password Successfully Changed</p>
+        </div>
       </div>
     </div>
   </div>
