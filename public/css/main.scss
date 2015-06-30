@@ -175,15 +175,44 @@ pre code {
 }
 
 .stats {
-  background-color: #fff;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  @include raised();
+  //background-color: #fff;
+  //padding-top: 100px;
+  //padding-bottom: 100px;
+  //@include raised();
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  .win-loss { @include raised(); }
+
+  .wins-half,
+  .loss-half {
+    @include raised();
+    z-index: 2;
+    height: 400px;
+    //min-height: 400px;
+    margin-bottom: 100px;
+  }
+
+  .wins-half {
+    z-index: 5;
+    //@include raised();
+    background-color: #43A047;
+  }
+
+  .loss-half {
+    z-index: 4;
+    background-color: #E53935;
+  }
 }
 
 .player-rank {
+  position: relative;
+  //top: 100px;
+  //margin-left: -50%;
+  margin-bottom: -280px;
   font-weight: bold;
   font-size: 10em;
+  color: #fff;
 }
 
 @media (max-width: 1000px) {
@@ -191,10 +220,22 @@ pre code {
     font-size: 6em;
   }
 }
+
 @media (max-width: 750px) {
+  .wins-half,
+  .loss-half {
+    height: 200px;
+  }
+
   .player-rank {
+    margin-bottom: -200px;
     font-size: 4em;
   }
+}
+
+.stats-label {
+  margin-top: -90px;
+  padding: 10px;
 }
 
 .personal-records {
@@ -284,7 +325,8 @@ footer {
 }
 
 .preloader {
-  padding: 50px;
+  padding: 20px;
+  margin: 0 auto;
   background: url('../img/preloader.gif') no-repeat 50% 50% transparent;
 }
 

@@ -6,20 +6,16 @@
     </div>
   </div>
   <div class="stats">
-    <div class="container">
-      <div class="row">
-        <div class="six columns">
-          <h4>Player Rank</h4>
-          <h1 class="u-text-center player-rank">{{ 5/0 }}</h1>
-        </div>
-        <div class="six columns">
-          <h4>Win Rate</h4>
-          <!-- <div id="donut_single" style="height: 300px;"></div> -->
-          <h1 class="u-text-center player-rank">{{ (user.wins / (user.wins + user.losses)) * 100 | number:1 }}%</h1>
-        </div>
-      </div>
+    <h1 class="player-rank u-text-center">{{ (user.wins / (user.wins + user.losses)) * 100 | number:1 }}%</h1>
+    <div class="win-loss">
+      <div class="wins-half u-pull-left" style="width: {{ (user.wins / (user.wins + user.losses)) * 100 | number:1 }}%;"></div>
+      <div class="loss-half u-pull-right" style="width: {{ 100 - ((user.wins / (user.wins + user.losses)) * 100) | number:1 }}%;"></div>
     </div>
+    <h4 class="u-pull-left stats-label">&larr; Wins</h4>
+    <h4 class="u-pull-right stats-label">Losses &rarr;</h4>
   </div>
+  <br>
+  <br>
   <div class="container">
     <div class="row">
       <div class="personal-records">
