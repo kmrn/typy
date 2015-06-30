@@ -37,7 +37,8 @@
       <li class="active"><a href="/play.html" alt="Play Typy!">Play</a></li>
       <li class=""><a href="/howtoplay.html" alt="Learn How to Play">How To Play</a></li>
       <!-- <li class=""><a href="/about.html" alt="About Typy">About</a></li> -->
-      <li class=""><a href="/gold.html" alt="Get Typy Gold">Gold</a></li>
+      <!-- <li class=""><a href="/gold.html" alt="Get Typy Gold">Gold</a></li> -->
+      <!-- <li><a href="http://patreon.com/typy" target="_blank" alt="Official Typy Blog">Blog</a></li> -->
       <li><a href="http://officialtypy.tumblr.com" target="_blank" alt="Official Typy Blog">Blog</a></li>
     </ul>
   </header>
@@ -48,7 +49,10 @@
       <div class="container">
   <div ng-controller="gameCtrl" class="row">
     <div class="two columns">
-      <div class="play-sidebar">
+      <div>
+        &nbsp;
+      </div>
+      <div ng-if="user.gold === false" class="play-sidebar">
         <!-- Typy In Game Header -->
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8593968956647437" data-ad-slot="3676540314" data-ad-format="auto"></ins>
         <script>
@@ -76,7 +80,10 @@
           <h1 class="page-title" ng-show="game.countdown < 1">GO!</h1>
           <hr>
           <pre ng-if="game.countdown < 1"><code>{{ game.phrase }}</code></pre>
-          <h5 class="page-title" ng-if="game.player2 === '...'">... Waiting for Player 2 ...</h5>
+          <div ng-if="game.player2 === '...'">
+            <h5 class="page-title">Waiting for Player 2</h5>
+            <div class="preloader"></div>
+          </div>
           <hr>
           <div ng-hide="isDisabled()">
             <form ng-if="user.$id === game.player1">
@@ -103,7 +110,7 @@
       </div>
     </div>
     <div class="two columns">
-      <div class="play-sidebar">
+      <div ng-if="user.gold === false" class="play-sidebar">
         <!-- Typy In Game Footer -->
         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8593968956647437" data-ad-slot="5153273516" data-ad-format="auto"></ins>
         <script>
