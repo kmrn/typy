@@ -21,11 +21,11 @@
           <a href="/login.html" class="u-full-width button button-primary">Login</a>
           <a href="/signup.html" class="u-full-width button button-primary">Sign Up</a>
         </div>
-        <hr>
+        <!-- <hr>
         <div class="login-form">
           <p class="page-title opacity-half">Don't feel like making an account?</p>
-          <a class="u-full-width button button-primary">Play as a Guest</a>
-        </div>
+          <a href="/guest.html" class="u-full-width button button-primary">Play as a Guest</a>
+        </div> -->
       </div>
       <div ng-if="authData" class="game-container" oncopy="return false" oncut="return false" onpaste="return false">
         <div ng-hide="game === undefined">
@@ -38,15 +38,15 @@
           <div ng-hide="isDisabled()">
             <form ng-if="user.$id === game.player1">
               <label for="player1input">{{ game.player1name }} <!-- <span class="gold-flair" ng-if="Profile(player1).gold">GOLD MEMBER</span> --></label>
-              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="You" id="player1input">
+              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-model-options="{ debounce: { 'default': 1, 'blur': 1 } }" ng-change placeholder="You" id="player1input">
               <label for="player2input">{{ game.player2name }} <!-- <span class="gold-flair" ng-if="Profile(player2).gold">GOLD MEMBER</span> --></label>
-              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="Your Opponent" id="player2input">
+              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-model-options="{ debounce: { 'default': 1, 'blur': 1 } }" ng-change placeholder="Your Opponent" id="player2input">
             </form>
             <form ng-if="user.$id === game.player2">
               <label for="player2input">{{ game.player2name }} <!-- <span class="gold-flair" ng-if="Profile(player2).gold">GOLD MEMBER</span> --></label>
-              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-change placeholder="You" id="player2input">
+              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input2" ng-model-options="{ debounce: { 'default': 1, 'blur': 1 } }" ng-change placeholder="You" id="player2input">
               <label for="player1input">{{ game.player1name }} <!-- <span class="gold-flair" ng-if="Profile(player1).gold">GOLD MEMBER</span> --></label>
-              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-change placeholder="Your Opponent" id="player1input">
+              <input class="u-full-width" type="text" ng-disabled="game.countdown > 0" ng-model="game.input1" ng-model-options="{ debounce: { 'default': 1, 'blur': 1 } }" ng-change placeholder="Your Opponent" id="player1input">
             </form>
           </div>
           <div ng-if="game.winner">
