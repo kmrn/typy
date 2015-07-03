@@ -23,18 +23,18 @@ app.factory("Profile", ["$firebaseObject",
 
 app.controller("authCtrl", ["$scope", "$timeout", "Auth", "Profile",
     function($scope, $timeout, Auth, Profile) {
-
         $scope.auth = Auth;
-
-        if (Auth.$getAuth() !== null) {
-            $scope.user = Profile(Auth.$getAuth().uid);
-        }
 
         // any time auth status updates, add the user data to scope
         $scope.auth.$onAuth(function(authData) {
             $scope.authData = authData;
         });
             
+
+        if (Auth.$getAuth() !== null) {
+            $scope.user = Profile(Auth.$getAuth().uid);
+        }
+
         // $scope.userExists = function(userId) {
         //     var usersRef = new Firebase("https://typy.firebaseio.com/users/");
         //     usersRef.child(userId).once('value', function(snapshot) {
@@ -72,6 +72,18 @@ app.controller("authCtrl", ["$scope", "$timeout", "Auth", "Profile",
                 console.error("Authentication failed: ", error);
             });
         };
+
+        // $scope.guestLogin = function() {
+        //     $scope.error = null;
+
+        //     Auth.$authAnonymously().then(function(authData) {
+        //         console.log("Logged in as: ", authData.uid);
+        //         // user = Auth.$getAuth().uid;
+        //         // user.displayName = Auth.$getAuth().uid;
+        //     }).catch(function(error) {
+        //         console.log("Authentication failed: ", error);
+        //     });
+        // };
 
         $scope.createUser = function() {
             $scope.error = null;

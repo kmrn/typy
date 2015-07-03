@@ -51,22 +51,24 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
     function($scope, $interval, Auth, Profile, Library, Games, GetGame, GameObject) {
 
         $scope.auth = Auth;
-
-        if (Auth.$getAuth() !== null) {
-            $scope.user = Profile(Auth.$getAuth().uid);
-        }
+        $scope.authData;
 
         // any time auth status updates, add the user data to scope
         $scope.auth.$onAuth(function(authData) {
             $scope.authData = authData;
         });
 
+        if (Auth.$getAuth() !== null) {
+            $scope.user = Profile(Auth.$getAuth().uid);
+        }
+
+
         $scope.game;
         $scope.gameOver = false;
 
         $scope.count = function() {
             $scope.game.countdown -= 1;
-        }
+        };
 
         $scope.newGame = function() {
             $scope.game = GameObject();
@@ -75,7 +77,8 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                 //$scope.game.phrase = Library();
                 Library().$loaded().then(function(library) {
                     $scope.game.phrase = library[Math.floor(Math.random() * library.length)].$value;
-                });
+                }); 
+
                 $scope.game.player1 = $scope.user.$id;
                 $scope.game.player1name = $scope.user.displayName;
                 $scope.game.player2 = "...";
@@ -87,7 +90,7 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
 
                 console.log("new game created");
             });
-        }
+        };
 
         $scope.findGame = function() {
             var games = Games();
@@ -102,8 +105,16 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                             if ($scope.game.player1 === $scope.user.$id) {
                                 joined = false;
                             } else {
+                                // if ($scope.user) {
+                                //     $scope.game.player2 = $scope.user.$id;
+                                //     $scope.game.player2name = $scope.user.displayName;
+                                // } else {
+                                //     $scope.game.player2 = $scope.authData.uid;
+                                //     $scope.game.player2name = $scope.authData.uid;  
+                                // }
                                 $scope.game.player2 = $scope.user.$id;
                                 $scope.game.player2name = $scope.user.displayName;
+                                console.log("you have an account");
 
                                 $interval( function() {
                                     $scope.game.countdown--;
@@ -118,7 +129,7 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                     $scope.newGame();
                 }
             });
-        }
+        };
 
         $scope.isDisabled = function() {
             if ($scope.game != undefined) {
@@ -130,21 +141,22 @@ app.controller("gameCtrl", ["$scope", "$interval", "Auth", "Profile", "Library",
                     }
 
                     if ($scope.game.input2 === $scope.game.phrase) {
-                        $scope.game.winner = $scope.game.player2;                        $scope.gameOver = 1;
+                        $scope.game.winner = $scope.game.player2;
+                        $scope.gameOver = 1;
                     }
 
                     $scope.gameOver = true;
                     return true;
                 }
             }
-        }
+        };
 
         $scope.destroyGame = function() {
             GetGame($scope.game.$id, true);
             $scope.gameOver = false;
 
             return "Leaving this page ends the game. The game data for this round will be destroyed.";
-        }
+        };
 
         if (authData) {
             $scope.findGame();

@@ -4,7 +4,7 @@
       <div>
         &nbsp;
       </div>
-      <div ng-if="user.gold === false" class="play-sidebar">
+      <div class="play-sidebar">
         <!-- Typy In Game Header -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -14,7 +14,6 @@
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-
       </div>
     </div>
     <div class="eight columns play-content">
@@ -27,7 +26,10 @@
         <!-- <hr>
         <div class="login-form">
           <p class="page-title opacity-half">Don't feel like making an account?</p>
-          <a href="/guest.html" class="u-full-width button button-primary">Play as a Guest</a>
+          <button ng-controller="authCtrl" ng-click="guestLogin()" class="u-full-width button-primary">Play as a Guest</button>
+          <!<form ng-controller="authCtrl" ng-submit="guestLogin()" id="guestForm" class="guest-login-form">
+            <input type="submit" value="Play as a Guest" class="u-full-width button-primary" id="anon-submit">
+          </form>
         </div> -->
       </div>
       <div ng-if="authData" class="game-container" oncopy="return false" oncut="return false" onpaste="return false">
@@ -66,7 +68,7 @@
       </div>
     </div>
     <div class="two columns">
-      <div ng-if="user.gold === false" class="play-sidebar">
+      <div class="play-sidebar">
         <!-- Typy In Game Footer -->
         <ins class="adsbygoogle"
              style="display:block"
