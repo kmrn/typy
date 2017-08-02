@@ -1,6 +1,6 @@
 # Typy
 
-A fun typing game to play with strangers (or friends)! You can read all about it on it's portfolio post [here](http://kamranpayne.com/projects/2015/06/22/typy.html).
+A fun typing game to play with strangers (or friends)! You can read all about it on it's portfolio post [here](http://kamranpayne.com/projects/2015/06/22/typy.html). It was built using Harp.
 
 ### TL;DR
 It's a simple free Firebase app that uses AngularJS (before it was too cool for school and started using TypeScript) and Firebases own AngularFire library.
